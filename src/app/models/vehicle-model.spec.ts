@@ -2,6 +2,6 @@ import { VehicleModel } from './vehicle-model';
 
 describe('VehicleModel', () => {
   it('should create an instance', () => {
-    expect(new VehicleModel()).toBeTruthy();
+    expect(new VehicleModel("teste", "1")).toBeTruthy();
   });
 });
