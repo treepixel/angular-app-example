@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 import { Client } from '../models/client'
 
@@ -10,6 +11,10 @@ export class StorageService {
   constructor() { }
 
   readonly STORAGE_KEY = '@register_app:storage'
+
+  getClients(): Observable<Client[]> {
+    return new BehaviorSubject(this.getFromStorage());
+  }
 
   addClient(client: Client): void {
     let clients: Client[] = this.getFromStorage();

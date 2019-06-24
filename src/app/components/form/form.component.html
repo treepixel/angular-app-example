@@ -1,7 +1,7 @@
 <div class="content">
   <div class="container">
     <h1>Adicionar Cliente</h1>
-    <form [formGroup]="form" novalidate>
+    <form [formGroup]="form" novalidate (ngSubmit)="submit()">
       <h3>Dados Pessoais</h3>
       <div class="row">
         <input type="text" placeholder="Nome" formControlName="name" />
@@ -27,14 +27,14 @@
       </div>
       <h3>Veículo</h3>
       <div class="row">
-        <select formControlName="brand">
+        <select formControlName="brand" [compareWith]="check">
           <option *ngFor="let brand of brands" [ngValue]="brand">
             {{ brand.nome }}
           </option>
         </select>
       </div>
       <div class="row">
-        <select formControlName="vehicle">
+        <select formControlName="vehicle" [compareWith]="check">
           <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">
             {{ vehicle.nome }}
           </option>
