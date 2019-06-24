@@ -1,21 +1,16 @@
 import { VehicleBrand } from './vehicle-brand'
 import { VehicleModel } from './vehicle-model'
+import { generateUID } from '../Utils/UID'
 
 export class Client {
-    public name: string;
-    public cpf: string;
-    public phone: string;
-    public birthday: Date;
-    public brand: VehicleBrand;
-    public vehicle: VehicleModel;
-
     constructor (
-        name: string,
-        cpf: string,
-        phone: string,
-        birthday: Date,
-        brand: VehicleBrand,
-        vehicle: VehicleModel
+        public name: string,
+        public cpf: string,
+        public phone: string,
+        public birthday: Date,
+        public brand: VehicleBrand,
+        public vehicle: VehicleModel,
+        public id?: string
     )
     { 
         this.name = name;
@@ -24,5 +19,6 @@ export class Client {
         this.birthday = birthday;
         this.brand = brand;
         this.vehicle = vehicle;
+        this.id = id === undefined ? generateUID() : id;
     }
 }
