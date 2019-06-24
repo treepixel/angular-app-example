@@ -1,0 +1,63 @@
+form {
+  margin-top: 3rem;
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+
+    &.pull-right {
+      justify-content: flex-end;
+    }
+
+    input,
+    select {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px solid #ababab;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #7159c1;
+      margin: 0 0.5rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:only-child {
+        margin: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    button {
+      background: transparent;
+      padding: 0.5rem 4rem;
+      border: 2px solid #7159c1;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #7159c1;
+
+      &:hover {
+        background: #7159c1;
+        color: #fff;
+      }
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+
+      input,
+      select {
+        margin: 0.75rem 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
