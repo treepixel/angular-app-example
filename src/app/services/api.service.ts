@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { VehicleBrand } from '../models/vehicle-brand'
 import { VehicleModel} from '../models/vehicle-model'
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -20,5 +21,8 @@ export class ApiService {
   
   getVehiclesModels(code: string): Observable<VehicleModel[]> {
     return this.http.get<VehicleModel[]>(`${this.API_URL}/marcas/${code}/modelos`)
+      .pipe(
+        map((value: any) => value.modelos)
+      )
   }
 }

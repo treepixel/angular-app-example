@@ -1,33 +1,47 @@
 <div class="content">
   <div class="container">
     <h1>Adicionar Cliente</h1>
-    <form novalidate>
+    <form [formGroup]="form" novalidate>
       <h3>Dados Pessoais</h3>
       <div class="row">
-        <input type="text" placeholder="Nome" />
+        <input type="text" placeholder="Nome" formControlName="name" />
       </div>
       <div class="row">
-        <input type="text" placeholder="CPF" />
-        <input type="text" placeholder="Telefone" />
-        <input type="date" placeholder="Data Nascimento" />
+        <input
+          type="text"
+          placeholder="CPF"
+          formControlName="cpf"
+          mask="000.000.000-00"
+        />
+        <input
+          type="text"
+          placeholder="Telefone"
+          formControlName="phone"
+          mask="(00) 0000-0000"
+        />
+        <input
+          type="date"
+          placeholder="Data Nascimento"
+          formControlName="birthday"
+        />
       </div>
       <h3>Veículo</h3>
       <div class="row">
-        <select>
-          <option>Selione uma Marca</option>
-          <option>Ford</option>
-          <option>Fiat</option>
+        <select formControlName="brand">
+          <option *ngFor="let brand of brands" [ngValue]="brand">
+            {{ brand.nome }}
+          </option>
         </select>
       </div>
       <div class="row">
-        <select>
-          <option>Selione um Modelo</option>
-          <option>Ford</option>
-          <option>Fiat</option>
+        <select formControlName="vehicle">
+          <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">
+            {{ vehicle.nome }}
+          </option>
         </select>
       </div>
       <div class="row pull-right">
-        <button type="submit">Adicionar</button>
+        <button type="submit" [disabled]="!form.valid">Adicionar</button>
       </div>
     </form>
   </div>

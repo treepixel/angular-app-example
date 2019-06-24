@@ -20,6 +20,18 @@ form {
       color: #7159c1;
       margin: 0 0.5rem;
 
+      &.ng-invalid {
+        border: 1px solid #dd2727;
+      }
+
+      &.ng-valid {
+        border: 1px solid #7159c1;
+      }
+
+      &.ng-untouched {
+        border: 1px solid #ababab;
+      }
+
       &:first-child {
         margin-left: 0;
       }
@@ -40,6 +52,17 @@ form {
       border-radius: 5px;
       font-size: 1rem;
       color: #7159c1;
+
+      &[disabled] {
+        border: 2px solid #d7d0ec;
+        color: #d7d0ec;
+        cursor: not-allowed;
+
+        &:hover {
+          background: transparent;
+          color: #d7d0ec;
+        }
+      }
 
       &:hover {
         background: #7159c1;
