@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
+import { Router, ActivatedRoute, Params } from '@angular/router'
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 
@@ -18,13 +18,16 @@ import { Client } from 'src/app/models/client';
 })
 export class FormComponent implements OnInit {
   
-  public form: FormGroup;
-  public brands: VehicleBrand[];
-  public vehicles: VehicleModel[];
-  public client: Client;
+  private form: FormGroup;
+  private brands: VehicleBrand[];
+  private vehicles: VehicleModel[];
+  private client: Client;
+  private modeEdition: string;
+  private clientId: string;
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private formBuilder: FormBuilder, 
     private apiService: ApiService, 
     private storageService: StorageService,
@@ -32,9 +35,13 @@ export class FormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    //Get de brands of vehicle and populate combobox
     this.apiService.getVehiclesBrands()
     .subscribe(data => this.brands = data)
 
+    
+    //Build the form and settings validators
     this.form = this.formBuilder.group({
       'name': [null, [ Validators.required, Validators.minLength(3), Validators.maxLength(120) ]],
       'cpf': [null, [ Validators.required, this.validateBrService.cpf ]],
@@ -44,36 +51,51 @@ export class FormComponent implements OnInit {
       'vehicle': [null, [ Validators.required ]],
     });
 
+    //Populate vehicle combobox based on brand selected
     this.form.get('brand').valueChanges
       .pipe(
         switchMap(value => this.apiService.getVehiclesModels(value.codigo))
       )
       .subscribe(data => this.vehicles = data);
 
+
+    //Check if is edition or new Client
     this.route.params.subscribe((params: Params) => {
       if(params.id){
+        this.modeEdition = 'edit';
+        this.clientId = params.id;
         this.client = this.storageService.getClient(params.id);
         this.form.patchValue(this.client);
       }
     });
   }
 
-  submit() {
-    this.storageService.addClient(
-      new Client(
-        this.form.value.name,
-        this.form.value.cpf,
-        this.form.value.phone,
-        this.form.value.birthday,
-        this.form.value.brand,
-        this.form.value.vehicle
-      )
-    )
+  //Submit form weather new client or edit client
+  submit() {   
+    if(this.modeEdition == 'edit'){
+      this.storageService.editClient(this.mapDataToClient(this.form.value), this.clientId)
+    } else {
+      this.storageService.addClient(this.mapDataToClient(this.form.value));
+    }
+    this.router.navigate(['']);
   } 
   
+  //function to compare objects to set combobox in case of edition
   check(obj1, obj2) {
     return obj1 && obj2 
       ? (obj1.codigo === obj2.codigo && obj1.nome === obj2.nome) 
       : obj1 === obj2;
+  }
+
+  //function to treat data from form.value and creates a new Client object
+  mapDataToClient(data: any): Client {
+    return new Client(
+      data.name,
+      data.cpf,
+      data.phone,
+      data.birthday,
+      data.brand,
+      data.vehicle
+    )
   }
 }

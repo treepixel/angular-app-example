@@ -31,7 +31,15 @@ export class StorageService {
     let clients: Client[] = this.getFromStorage();
     let clientsUpdated: Client[] = [
       ...clients.filter(client => client.id !== id),
-      client
+      {
+        ...clients.find(client => client.id == id),
+        name: client.name,
+        cpf: client.cpf,
+        phone: client.phone,
+        birthday: client.birthday,
+        brand: client.brand,
+        vehicle: client.vehicle
+      }
     ];
     this.saveOnStorage(clientsUpdated);
   }

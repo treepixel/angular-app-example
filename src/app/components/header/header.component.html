@@ -1,6 +1,9 @@
 <div class="header">
   <div class="container">
     <h1>Clientes</h1>
-    <a routerLink="/adicionar-cliente">+</a>
+    <a *ngIf="currentRoute == '/'" routerLink="/adicionar-cliente">+</a>
+    <a *ngIf="currentRoute != '/'" routerLink="/" style="font-size:1rem">
+      <fa-icon [icon]="faList"></fa-icon>
+    </a>
   </div>
 </div>

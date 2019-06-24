@@ -10,21 +10,24 @@ import { Client } from 'src/app/models/client';
   styleUrls: ['./list.component.less']
 })
 export class ListComponent implements OnInit {
-  faPen = faPen;
-  faTimes = faTimes;
-
+  public faPen = faPen;
+  public faTimes = faTimes;
   public clients: Client[];
   
   constructor(
     private storageService: StorageService,
   ) { }
-
+  
+  //function to delete client of localstorage
   deleteClient(id: string, $event): void {
     $event.preventDefault()
-    console.log("id", id);
+    this.clients = this.clients.filter(client => client.id !== id);
+    this.storageService.removeClient(id);
   }
 
   ngOnInit() {
+    
+    //Assing this.clients with clients from localstorage
     this.storageService.getClients()
     .subscribe(data => this.clients = data)
   }
