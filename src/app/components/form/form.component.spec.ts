@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule } from '@angular/forms'
+import { NgxMaskModule } from 'ngx-mask';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
 import { FormComponent } from './form.component';
 
 describe('FormComponent', () => {
@@ -8,7 +13,15 @@ describe('FormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormComponent ]
+      imports: [
+        HttpClientTestingModule, 
+        RouterTestingModule,
+        ReactiveFormsModule,
+        NgxMaskModule.forRoot()
+      ],
+      declarations: [ 
+        FormComponent 
+      ]
     })
     .compileComponents();
   }));

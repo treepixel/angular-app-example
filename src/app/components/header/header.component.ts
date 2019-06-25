@@ -11,11 +11,10 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
 
-  private currentRoute: string;
+  public currentRoute: string;
   public faList = faList;
 
   constructor(private router: Router) {
-    
     /*
      * Observing the current route to change the 
      * button of header

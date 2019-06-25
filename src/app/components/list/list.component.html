@@ -1,7 +1,7 @@
 <div class="content">
   <div class="container">
     <h1>Lista</h1>
-    <ul class="list">
+    <ul class="list" *ngIf="clients">
       <li *ngFor="let client of clients">
         <div class="info">
           <h3>{{ client.name }}</h3>

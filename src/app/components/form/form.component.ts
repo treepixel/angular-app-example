@@ -36,20 +36,22 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
 
-    //Get de brands of vehicle and populate combobox
-    this.apiService.getVehiclesBrands()
-    .subscribe(data => this.brands = data)
-
-    
     //Build the form and settings validators
     this.form = this.formBuilder.group({
-      'name': [null, [ Validators.required, Validators.minLength(3), Validators.maxLength(120) ]],
-      'cpf': [null, [ Validators.required, this.validateBrService.cpf ]],
+      'name': [null, [ Validators.required, 
+        Validators.minLength(3), 
+        Validators.maxLength(120) ]],
+      'cpf': [null, [ Validators.required, 
+        this.validateBrService.cpf ]],
       'phone': [null, [Validators.required]],
       'birthday': [null, [ Validators.required ]],
       'brand': [null, [ Validators.required ]],
       'vehicle': [null, [ Validators.required ]],
     });
+
+    //Get de brands of vehicle and populate combobox
+    this.apiService.getVehiclesBrands()
+    .subscribe(data => this.brands = data)
 
     //Populate vehicle combobox based on brand selected
     this.form.get('brand').valueChanges
@@ -73,9 +75,14 @@ export class FormComponent implements OnInit {
   //Submit form weather new client or edit client
   submit() {   
     if(this.modeEdition == 'edit'){
-      this.storageService.editClient(this.mapDataToClient(this.form.value), this.clientId)
+      this.storageService.editClient(
+        this.mapDataToClient(this.form.value), 
+        this.clientId
+      )
     } else {
-      this.storageService.addClient(this.mapDataToClient(this.form.value));
+      this.storageService.addClient(
+        this.mapDataToClient(this.form.value)
+      );
     }
     this.router.navigate(['']);
   } 
