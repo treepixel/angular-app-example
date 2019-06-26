@@ -17,12 +17,6 @@ describe('Angular Crud Application', () => {
     expect(page.getTitleText()).toEqual('Clientes');
   });
 
-  it('should List of clients starts with 0 clients', async () => {
-    const clientesCount = await page.getClients().count();
-
-    expect(clientesCount).toBe(0);
-  });
-
   it('should not enable add new client if dont fill every fields correctly', async () => {
     addClientPage = new AddClientPage();
     addClientPage.navigateTo();

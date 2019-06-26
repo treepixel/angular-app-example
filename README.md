@@ -1,5 +1,19 @@
 # Angular App Example
 
+This is a web application developed with Angular. That application allows you add clients persisting them in LocalStorage, as well edit them. See the following pictures:
+
+![](/docs/pic1.png)
+
+
+
+![](/docs/pic2.png)
+
+
+
+![](/docs/pic3.png)
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
 
 ## Development server

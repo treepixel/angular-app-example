@@ -1,25 +1,38 @@
 <div class="content">
   <div class="container">
-    <h1>Lista</h1>
-    <ul class="list" *ngIf="clients">
-      <li *ngFor="let client of clients">
-        <div class="info">
-          <h3>{{ client.name }}</h3>
-          <span>CPF: {{ client.cpf | mask: "000.000.000-00" }}</span>
-        </div>
-        <div class="control">
-          <a
-            class="primary"
-            [routerLink]="['/editar-cliente', client.id]"
-            style="font-size: 0.8rem;"
-          >
-            <fa-icon [icon]="faPen"></fa-icon>
-          </a>
-          <a href="#" class="danger" (click)="deleteClient(client.id, $event)">
-            <fa-icon [icon]="faTimes"></fa-icon>
-          </a>
-        </div>
-      </li>
-    </ul>
+    <div *ngIf="clients.length > 0">
+      <h1>Lista</h1>
+      <ul class="list">
+        <li *ngFor="let client of clients">
+          <div class="info">
+            <h3>{{ client.name }}</h3>
+            <span>CPF: {{ client.cpf | mask: "000.000.000-00" }}</span>
+          </div>
+          <div class="control">
+            <a
+              class="primary"
+              [routerLink]="['/editar-cliente', client.id]"
+              style="font-size: 0.8rem;"
+            >
+              <fa-icon [icon]="faPen"></fa-icon>
+            </a>
+            <a
+              href="#"
+              class="danger"
+              (click)="deleteClient(client.id, $event)"
+            >
+              <fa-icon [icon]="faTimes"></fa-icon>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="message" *ngIf="clients.length == 0">
+      <h1>Nenhum cliente cadastrado</h1>
+      <p>
+        Por favor clique no botão adicionar acima <Br />para cadastrar o
+        primeiro cliente
+      </p>
+    </div>
   </div>
 </div>
