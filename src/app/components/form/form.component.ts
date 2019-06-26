@@ -18,12 +18,12 @@ import { Client } from 'src/app/models/client';
 })
 export class FormComponent implements OnInit {
   
-  private form: FormGroup;
-  private brands: VehicleBrand[];
-  private vehicles: VehicleModel[];
-  private client: Client;
-  private modeEdition: string;
-  private clientId: string;
+  public form: FormGroup;
+  public brands: VehicleBrand[];
+  public vehicles: VehicleModel[];
+  public client: Client;
+  public modeEdition: string;
+  public clientId: string;
   
   constructor(
     private route: ActivatedRoute,
